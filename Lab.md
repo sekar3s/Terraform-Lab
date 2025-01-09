@@ -1,6 +1,8 @@
 ## Terraform Lab Introduction
 
-In this lab, you will gain hands-on exposure to setting up Terraform environment, building and deploying Terraform scripts to deploy Azure resources. The lab includes a self-paced exercise to help you build a Terraform code as a challenge. The labs are split into five parts which build up on each other. 
+In this lab, you will gain hands-on exposure to setting up Terraform environment, building and deploying Terraform scripts to deploy Azure resources. You will learn how to authenticate with Terraform's Azure Provider, manage Terraform state on Azure, and how to stand up resources in Azure using Terraform.
+
+The lab includes a self-paced exercise to help you build a Terraform code as a challenge. The labs are split into five parts which build up on each other. 
 
 > **Total Estimated Duration**: 5 hours (spilit into three days)
 
@@ -19,13 +21,7 @@ In this lab, you will gain hands-on exposure to setting up Terraform environment
 
 ---
 
-## Terraform and Azure
-
-## Overview
-
-In this lab, you will exercise hands-on labs with Terraform. You will learn how to authenticate with Terraform's Azure Provider, manage Terraform state on Azure, and how to stand up resources in Azure using Terraform.
-
-### Labs
+## Lab Components
 
 Lab 0 – Install and Configure Terraform (Duration: 15 minutes)
 

@@ -21,8 +21,6 @@ In this lab, you will gain hands-on exposure to setting up Terraform environment
 
 ## Instructions
 
-### Step 1: Create a Custom Workflow Using the Starter File
-
 1. Navigate to the [**Custom Workflow Starter File**](./intro-custom-workflow-starter.md).
 2. Copy the content of the starter file:
 

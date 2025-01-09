@@ -18,3 +18,21 @@ In this lab, you will gain hands-on exposure to setting up Terraform environment
 <img src="images/be04a9414465ed5d7d1be43d60374058.png" alt="drawing" width="300"/>
 
 ---
+
+## Terraform and Azure
+
+## Overview
+
+In this lab, you will exercise hands-on labs with Terraform. You will learn how to authenticate with Terraform's Azure Provider, manage Terraform state on Azure, and how to stand up resources in Azure using Terraform.
+
+### Labs
+
+Lab 0 – Install and Configure Terraform (Duration: 15 minutes)
+
+Lab 1 - Azure Provider – Authenticating (Duration: 1 hour 15 minutes)
+
+Lab 2 - Managing Terraform State on Azure (Duration: 1 hour)
+
+Lab 3 - Create a Terraform Module (Duration: 1 hour)
+
+Lab 4 - Deploying Resources (Duration: 1 hour 30 minutes)

@@ -22,7 +22,12 @@ In this lab, you will gain hands-on exposure to setting up Terraform environment
 ## Instructions
 
 1. Launch the Virtual Lab session (Access/Training key will be provided by your instructor on the day of the workshop).
-2. The virtual session will be active for 7 days after saving, otherwise it will expire after 8 hours. Please make sure to Save the session before wrapping up for the day.
+2. Copy the content of the starter file:
+
+   ```yaml
+   name: Intro - Custom Workflow
+   ```
+
 3. In your repository, create a new workflow file under `.github/workflows` and name it `intro-custom-workflow.yml`.
 4. Paste the copied content into the new file.
 5. Commit the workflow file to the `main` branch.

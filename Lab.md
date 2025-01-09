@@ -18,3 +18,20 @@ In this lab, you will gain hands-on exposure to setting up Terraform environment
 <img src="images/be04a9414465ed5d7d1be43d60374058.png" alt="drawing" width="300"/>
 
 ---
+
+## Instructions
+
+### Step 1: Create a Custom Workflow Using the Starter File
+
+1. Navigate to the [**Custom Workflow Starter File**](./intro-custom-workflow-starter.md).
+2. Copy the content of the starter file:
+
+   ```yaml
+   name: Intro - Custom Workflow
+   ```
+
+3. In your repository, create a new workflow file under `.github/workflows` and name it `intro-custom-workflow.yml`.
+4. Paste the copied content into the new file.
+5. Commit the workflow file to the `main` branch.
+
+---

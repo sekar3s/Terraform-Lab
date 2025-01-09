@@ -16,3 +16,5 @@ In this lab, you will gain hands-on exposure to setting up Terraform environment
 6. Please reach out to the instructor if you have any questions or if you are stuck with any of the steps 
 
 <img src="images/be04a9414465ed5d7d1be43d60374058.png" alt="drawing" width="300"/>
+
+---

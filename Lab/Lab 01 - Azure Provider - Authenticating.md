@@ -22,7 +22,7 @@ Terraform recommends using either a Service Principal or Managed Service Identit
 
 Terraform recommends using either a Service Principal or Managed Service Identity when running Terraform non-interactively (such as when running Terraform in a CI server) - and authenticating using the Azure CLI when running Terraform locally.
 
-<ins> ** Setting up the Terraform provider ** <ins>
+#### <ins> Setting up the Terraform provider <ins>
 
 In Terraform there are multiple [providers](https://www.terraform.io/docs/providers/index.html). A provider is responsible for understanding API interactions and exposing resources. Terraform basically adds an abstraction layer to json ARM templates which are the payloads that Azure's API interacts. You may create, manage, and update infrastructure for building resources such as physical machines, VMs, network switches, containers, and more.
 

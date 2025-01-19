@@ -53,24 +53,24 @@ It's possible to complete this task in either the Azure CLI or in the Azure Port
 
 1.  Open a new Command Prompt session as an “Administrator” user. **NOTE:** Administrator privileges are necessary to perform the installation of modules below.
 
-2.  Run
+2.  Install Azure Module
    ```
 Install-Module -Name Az
    ```
 
-3. Run 
+3. Import Azure Module
    ```
    Import-Module -Name Az
    ```
 
-4.  Run 
+4.  Connect Azure Account
    ```
 Connect-AzAccount
    ```
 
 5.  Your default browser will pop up and prompt you for credentials. Select **Work/School** and input your credentials.
 
-6.  Run and copy the id
+6.  Get the Azure Subscription and copy the id to be used in the next step
    ```
 Get-AzSubscription
    ```

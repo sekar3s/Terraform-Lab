@@ -81,7 +81,7 @@ After installing Terraform, verify that the installation worked, and what is the
 
 ## Summary
 
-In this LAB we completed the following activities
+In this lab, we completed the following activities:
 
 1.  Installation of prerequisites to run a Terraform template, by installing Azure CLI manually
 2.  Download of Terraform, and system variables configuration to execute Terraform from Path in the local system

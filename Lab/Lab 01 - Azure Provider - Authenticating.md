@@ -60,7 +60,7 @@ Install-Module -Name Az
 
 3. Import Azure Module
    ```
-   Import-Module -Name Az
+Import-Module -Name Az
    ```
 
 4.  Connect Azure Account
@@ -75,7 +75,7 @@ Connect-AzAccount
 Get-AzSubscription
    ```
 
-7.  Run 
+7.  Set the Azure subscription. Replace the subscription ID from the output of step 6.
    ```
-Set-AzContext -Subscription <insert desired subscription id>
+Set-AzContext -Subscription <INSERT THE DESIRED SUBSCRIPTION ID>
    ```

@@ -28,7 +28,7 @@ In Terraform there are multiple [providers](https://www.terraform.io/docs/provid
 
 In this lab, we will, of course, be using the [Azure provider](https://www.terraform.io/docs/providers/azurerm/index.html). The following Provider block can be specified. The Azure Provider version we will use in this lab will be 4.0.0
 
-**Prerequisites**
+#### <ins> Prerequisites <ins>
 
 Navigate to the terraform_lab_dir where you will be writing code for your lab. Switch to Terraform lab directory in the console.
 

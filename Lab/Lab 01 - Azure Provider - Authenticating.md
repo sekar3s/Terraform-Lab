@@ -1,3 +1,4 @@
+
 ## Lab 01 - Azure Provider - Authenticating
 
 In this lab, you will install and configure Terraform to prepare the environment ready for hands-on
@@ -35,3 +36,32 @@ Navigate to the terraform_lab_dir where you will be writing code for your lab. S
 ```
 cd C:\Lab_Files\M07_Terraform\terraform_lab_dir
 ```
+
+#### <ins> Service Principal <ins>
+
+A Service Principal is an application within Azure Active Directory whose authentication tokens can be used as the client_id, client_secret, and tenant_id fields needed by Terraform (subscription_id can be independently recovered from your Azure account details).
+
+It's possible to complete this task in either the Azure CLI or in the Azure Portal - For the purpose of this lab, we will simply authenticate with our user credentials. However, it is important to note that authenticating via a Service Principal with a client secret which has the minimum rights needed to the subscription is the standard authentication method for an automation pipeline.
+
+**NOTE: You will need both CLI and Powershell versions for this lab.**
+
+#### <ins> Install Azure CLI <ins>
+
+1.  Navigate [here](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli) for installation instructions.
+
+#### <ins>  Login to azure Powershell Az <ins>
+
+1.  Open a new Command Prompt session as an “Administrator” user. NOTE: Administrator privileges are necessary to perform the installation of modules below.
+
+2.  Enter ```Install-Module -Name Az**```
+
+3.  Enter **Import-Module -Name Az**
+
+4.  Enter **Connect-AzAccount**
+
+5.  Your default browser will pop up and prompt you for credentials. Select **Work/School** and input your credentials.
+
+6.  Enter **Get-AzSubscription** and copy the id
+
+7.  Enter **Set-AzContext -Subscription \<insert desired subscription id\>**
+

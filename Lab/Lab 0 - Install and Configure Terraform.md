@@ -15,7 +15,7 @@ In this lab, you will install and configure Terraform to prepare the environment
 
 3.  Select 64-bit (386 version) and download the zip file (e.g.: terraform_1.9.8_windows_386) – **Latest version is 1.9.8** as of Nov 2024
 
-4.  Open the folder where you saved the downloaded file, and unzip the package in the folder you created in the step 1 `C:\\Program Files\\Terraform\\.` Terraform runs as a single binary named **terraform.exe**
+4.  Open the folder where you saved the downloaded file, and unzip the package in the folder you created in the step 1 `C:\Program Files\Terraform\` Terraform runs as a single binary named **terraform.exe**
 
 5.  Now we will make sure that the terraform binary is available on the PATH. **Open Control Panel** -\> **System** -\> **Advanced System settings** -\> **Environment Variables**
 
@@ -23,7 +23,7 @@ In this lab, you will install and configure Terraform to prepare the environment
 
 7.  In the **Edit environment variable** window, click **New**
 
-8.  Enter `C:\\Program Files\\Terraform\\`
+8.  Enter `C:\Program Files\Terraform\`
 
 9.  Click **OK** in all three windows closing the **System Properties** completely
 ---

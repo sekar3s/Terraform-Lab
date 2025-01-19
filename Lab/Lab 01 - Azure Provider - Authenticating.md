@@ -56,4 +56,22 @@ It's possible to complete this task in either the Azure CLI or in the Azure Port
 2.  Run
    ```
 Install-Module -Name Az
-```
+   ```
+
+3. Run 
+   ```Import-Module -Name Az
+   ```
+
+4.  Run 
+   ```Connect-AzAccount
+   ```
+
+5.  Your default browser will pop up and prompt you for credentials. Select **Work/School** and input your credentials.
+
+6.  Run and copy the id
+   ```Get-AzSubscription
+   ```
+
+7.  Run 
+   ```Set-AzContext -Subscription <insert desired subscription id>
+   ```

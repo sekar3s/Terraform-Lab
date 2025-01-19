@@ -56,5 +56,5 @@ It's possible to complete this task in either the Azure CLI or in the Azure Port
 2.  Run
    ```
 Install-Module -Name Az
-    ```
+```
 

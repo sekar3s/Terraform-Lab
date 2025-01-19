@@ -58,7 +58,7 @@ It's possible to complete this task in either the Azure CLI or in the Azure Port
 Install-Module -Name Az
    ```
 
-3. Import Azure Module
+3.  Import Azure Module
    ```
 Import-Module -Name Az
    ```

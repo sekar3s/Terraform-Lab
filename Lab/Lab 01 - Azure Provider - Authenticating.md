@@ -54,6 +54,7 @@ It's possible to complete this task in either the Azure CLI or in the Azure Port
 1.  Open a new Command Prompt session as an “Administrator” user. NOTE: Administrator privileges are necessary to perform the installation of modules below.
 
 2.  Run
-   ```Install-Module -Name Az**
+   ```
+Install-Module -Name Az**
     ```
 

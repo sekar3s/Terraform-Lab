@@ -9,7 +9,7 @@ In this lab, you will install and configure Terraform to prepare the environment
 
 ### Download and Install Terraform for Windows
 
-1.  Create the folder C:\\Program Files\\Terraform
+1.  Create the folder `C:\\Program Files\\Terraform`
 
 2.  Open Terraform download page <https://www.terraform.io/downloads.html>
 

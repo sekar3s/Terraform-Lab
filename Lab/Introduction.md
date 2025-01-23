@@ -33,4 +33,4 @@ The labs includes a self-paced [exercise/challenge](https://github.com/sekar3s/T
 
 [Lab 4](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2004%20-%20Deploying%20Resources.md) - Deploying Resources (Duration: 1 hour)
 
-[OPTIONAL - Lab 5] (https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2005%20(OPTIONAL)%20-%20Provision%3AAutomate%20Changes.md) - Provision/Automate Changes on Virtual Machine (Duration: 1 hour)
+[Lab 5](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2005%20(OPTIONAL)%20-%20Provision%3AAutomate%20Changes.md) (OPTIONAL) - Provision/Automate Changes on Virtual Machine (Duration: 1 hour)

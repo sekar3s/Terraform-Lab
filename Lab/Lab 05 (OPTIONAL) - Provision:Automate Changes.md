@@ -393,8 +393,4 @@ ls
 
 #### <ins> CONCLUSION <ins>
 
-In this lab, you learned
-
-1.  How to manage resources that are not managed by Terraform
-
-2.  How to provision a machine with incremental changes
+**Congrats! In this lab, you learned how to provision a machine with incremental changes**

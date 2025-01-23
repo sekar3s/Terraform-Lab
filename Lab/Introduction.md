@@ -1,10 +1,10 @@
 ## Terraform Lab Introduction
 
-In this lab, you will gain hands-on exposure to setting up Terraform environment, building and deploying Terraform scripts to deploy Azure resources. You will learn how to authenticate with Terraform's Azure Provider, manage Terraform state on Azure, and how to stand up resources in Azure using Terraform.
+In these labs, you will gain hands-on exposure to setting up Terraform environment, building and deploying Terraform scripts to deploy Azure resources. You will learn how to authenticate with Terraform's Azure Provider, manage Terraform state on Azure, and how to stand up resources in Azure using Terraform.
 
-The lab includes a self-paced exercise to help you build a Terraform code as a challenge. The labs are split into five parts which build up on each other. 
+The labs includes a self-paced [exercise/challenge](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2003%20-%20Creating%20Terraform%20Modules.md) (in Lab 03) to help you build a Terraform code as a challenge. The labs are split into five parts which build up on each other. 
 
-> **Total Estimated Duration**: 5 hours (spilit into three days)
+> **Total Estimated Duration**: 5-6 hours (spilit into three days)
 
 ---
 
@@ -23,12 +23,12 @@ The lab includes a self-paced exercise to help you build a Terraform code as a c
 
 ## Lab Components
 
-Lab 0 – Install and Configure Terraform (Duration: 15 minutes)
+[Lab 0](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%200%20-%20Install%20and%20Configure%20Terraform.md) – Install and Configure Terraform (Duration: 15 minutes)
 
-Lab 1 - Azure Provider – Authenticating (Duration: 1 hour 15 minutes)
+[Lab 1](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2001%20-%20Azure%20Provider%20-%20Authenticating.md) - Azure Provider – Authenticating (Duration: 1 hour 15 minutes)
 
-Lab 2 - Managing Terraform State on Azure (Duration: 1 hour)
+[Lab 2](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2002%20-%20Managing%20Terraform%20State%20on%20Azure.md) - Managing Terraform State on Azure (Duration: 1 hour)
 
-Lab 3 - Create a Terraform Module (Duration: 1 hour)
+[Lab 3](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2003%20-%20Creating%20Terraform%20Modules.md) - Creating Terraform Modules (Duration: 1 - 1.5 hours)
 
-Lab 4 - Deploying Resources (Duration: 1 hour 30 minutes)
+[Lab 4](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2004%20-%20Deploying%20(Additional)%20Resources.md) - Deploying Resources (Duration: 1 hour 30 minutes)

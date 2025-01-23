@@ -2,11 +2,15 @@
 
 In this lab, we will implement a provisioner script to automate workflows within a virtual machine using terraform [provisioner](https://www.terraform.io/docs/provisioners/index.html).
 
+## PRE-REQUISITE!!!
+
+Before running this lab, you should have deployed a fully functional virtual machine that you can connect to using SSH. Please complete the previous labs before working on this one.
+
 > **Estimated Duration**: 1 hour
 
 ---
 
-**Provisioner Script**
+#### <ins> Provisioner Script <ins>
 
 Provisioners are used to execute scripts on a local or remote machine as part of resource creation or destruction. Provisioners can be used to bootstrap a resource, cleanup before destroy, run configuration management, etc. Let's run a script on our machine.
 

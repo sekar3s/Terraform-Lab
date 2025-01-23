@@ -594,4 +594,4 @@ In this lab, you learned
 
 1.  How to deploy multiple resources that depend on each other.
 
-2.  How to manage resources that are not managed by Terraform
+2.  How to manage resources that are not deployed by Terraform

@@ -4,7 +4,7 @@ In these labs, you will gain hands-on exposure to setting up Terraform environme
 
 The labs includes a self-paced [exercise/challenge](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2003%20-%20Creating%20Terraform%20Modules.md) (in Lab 03) to help you build a Terraform code as a challenge. The labs are split into five parts which build up on each other. 
 
-> **Total Estimated Duration**: 5-6 hours (spilit into three days)
+> **Total Estimated Duration**: 5-6 hours (split into three days)
 
 ---
 
@@ -31,4 +31,6 @@ The labs includes a self-paced [exercise/challenge](https://github.com/sekar3s/T
 
 [Lab 3](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2003%20-%20Creating%20Terraform%20Modules.md) - Creating Terraform Modules (Duration: 1 - 1.5 hours)
 
-[Lab 4](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2004%20-%20Deploying%20(Additional)%20Resources.md) - Deploying Resources (Duration: 1 hour 30 minutes)
+[Lab 4](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2004%20-%20Deploying%20Resources.md) - Deploying Resources (Duration: 1 hour)
+
+[OPTIONAL - Lab 5] (https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2005%20(OPTIONAL)%20-%20Provision%3AAutomate%20Changes.md) - Provision/Automate Changes on Virtual Machine (Duration: 1 hour)

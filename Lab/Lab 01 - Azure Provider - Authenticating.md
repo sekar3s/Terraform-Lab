@@ -31,7 +31,7 @@ In this lab, we will, of course, be using the [Azure provider](https://www.terra
 
 #### <ins> Prerequisites <ins>
 
-Navigate to the terraform_lab_dir where you will be writing code for your lab. Switch to Terraform lab directory in the console.
+Navigate to the terraform_lab_dir where you will be writing code for your lab and ensure the prebuilt terraform file contents exist. You can use the Command Prompt or Windows file explore to perform this task.
 
 ```powershell
 cd C:\Lab_Files\M07_Terraform\terraform_lab_dir
@@ -47,18 +47,22 @@ It's possible to complete this task in either the Azure CLI or in the Azure Port
 
 #### <ins> Install Azure CLI <ins>
 
-1.  Navigate [here](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli) for installation instructions.
+1.  Navigate [here](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli) for installation instructions. Please make sure you download and install the 64 bit version. 
 
 #### <ins>  Login to azure Powershell Az <ins>
 
-1.  Open a new Command Prompt session as an “Administrator” user. **NOTE:** Administrator privileges are necessary to perform the installation of modules below.
+1.  Open a new Command Prompt session as an “Administrator” user and  Invoke/Launch the PowerShell using `powershell` command. **NOTE:** Administrator privileges are necessary to perform the installation of module below, otherwise you will get an error. 
 
-2.  Install Azure PowerShell Module
+   ```powershell
+powershell
+   ```
+
+2.  Install Azure PowerShell Module. You need to provide a prompt (Select [A] Yes to All) and agree to the installation of the module which will take a while. The installation will complete after a few minutes and if you are stuck with a cursor, press Enter to complete it.
    ```powershell
 Install-Module -Name Az
    ```
 
-3.  Import Azure PowerShell Module
+3.  Import Azure PowerShell Module. Similar to the installation, the import will run in the background and take a few minutes. The import will complete after a few minutes and if you are stuck with a cursor for a long time, press Enter to complete it.
    ```powershell
 Import-Module -Name Az
    ```
@@ -68,9 +72,11 @@ Import-Module -Name Az
 Connect-AzAccount
    ```
 
-5.  Your default browser will pop up and prompt you for credentials. Select **Work/School** and input your credentials.
+5.  Your default browser will pop up and prompt you for credentials. Select **Work/School** and input your credentials, which can be found under the Resources tab in the lab portal. 
 
-6.  Get the Azure Subscription and copy the id to be used in the next step
+![](images/resource.png)
+
+6.  Get the Azure Subscription and copy the id to be used in the next step. You can also find the Subscription ID under the "Resources tab" in the lab portal.
    ```powershell
 Get-AzSubscription
    ```

@@ -23,7 +23,7 @@ During this exercise, we will place the public ip code that we have been creatin
 
 In this exercise, you will create your own module named *my-frontend-module* by referencing the [Standard Module Structure](https://www.terraform.io/docs/modules/index.html#standard-module-structure). If you get stuck, feel free to peek through the VS Code *Explorer* pane at `C:\Lab_Files\M07_Terraform\terraform_lab_dir\m07-s03-e01-frontend-module`. You will see that the *m07-s03-e01-frontend-module* directory, has a `main.tf` file that simply mocks the *azurerm_public_ip* type of what is currently in the root main.tf found at `C:\Lab_Files\M07_Terraform\terraform_lab_dir\main.tf`. Similarly, `outputs.tf` has a copy of the output type and `variables.tf` has the variables to inject to the *azurerm_public_ip* object.
 
-**CHALLENGE REQUIREMENTS:**
+#### <ins> CHALLENGE REQUIREMENTS: <ins>
 
 1.  You must deploy 2 azurerm_public_ip's (PIPs). First PIP should be named *"dev-pip"* with a tag *"environment: dev"*. Second PIP should be named *"prod-pip"* with a tag *"environment: prod"*. Both PIP names should NOT have WHITESPACE.
 
@@ -73,7 +73,7 @@ By the end of the challenge, you should have the following target components:
 
 #### <ins> Extra Guidance and hints (if needed) <ins>
 
-**Hints:**
+**HINTS!!!**
 
 1.  Terraform has built-in [functions](https://www.terraform.io/docs/configuration/functions.html) that include string manipulation.
 
@@ -347,13 +347,13 @@ terraform init -backend-config="configs/prod/backend.tfvars" -backend-config="ac
 
 ![](images/2d4605191a67f0621d4f19e6a4cdff9a.png)
 
-22.  You realized that terraform has detected a state change in the backend configuration due to the different file name, so you decide to run terraform init with -reconfigure option.
+22.  You realized that terraform has detected a state change in the backend configuration due to the different **tfstate file name** (`prod.terraform.tfstate`) in the `configs/prod/backend.tfvars` file, so you decide to run terraform init with -reconfigure option.
 
 ```console
 terraform init -reconfigure -backend-config="configs/prod/backend.tfvars" -backend-config="access_key=$env:ARM_ACCESS_KEY"
 ```
 
-23.  The initialization is successful now and you see these state files created in your Azure Storage account.
+23.  The initialization of prod terraform state should be successful now and you should see these state files created in your Azure Storage account.
 
 ![A screenshot of a computer Description automatically generated](images/efb6a94686ff153f5458ec265484c2d4.png)
 
@@ -419,7 +419,7 @@ terraform init -reconfigure -backend-config="configs/dev/backend.tfvars" -backen
   
 **NOTE:** The reconfigure parameter is needed for terraform to reinitialize the dev environment
 
-3.  Run terraform destroy `-var-file="providers.tfvars"` to destroy your current target architecture
+3.  Run terraform destroy again to destroy the dev environment. Enter **“yes”** to proceed with the cleanup.
 
 ```console
 terraform destroy -var-file="providers.tfvars"

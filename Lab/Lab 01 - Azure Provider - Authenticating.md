@@ -74,7 +74,7 @@ Connect-AzAccount
 
 5.  Your default browser will pop up and prompt you for credentials. Select **Work/School** and input your credentials, which can be found under the Resources tab in the lab portal. 
 
-![](images/resource.png)
+![](images/resources.png)
 
 6.  Get the Azure Subscription and copy the id to be used in the next step. You can also find the Subscription ID under the "Resources tab" in the lab portal.
    ```powershell

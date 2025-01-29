@@ -302,7 +302,7 @@ You should receive something similar to the below output
 
    For more detail on Terraform init, please visit [here](https://www.terraform.io/docs/commands/init.html)
 
-7.  Inject the `providers.tfvars` file and run terraform plan. If you run into issues related to "az" command being not recognized, you probably missed to set the PATH mentioned in step of this [Running Terraform section](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2001%20-%20Azure%20Provider%20-%20Authenticating.md#--running-terraform-dont-run-these-commands-yet-)
+7.  Inject the `providers.tfvars` file and run terraform plan. **NOTE:** If you run into issues related to "az" command being not recognized, you probably missed to set the PATH mentioned in step 1 of [Running Terraform section](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2001%20-%20Azure%20Provider%20-%20Authenticating.md#--running-terraform-dont-run-these-commands-yet-)
       
 ```console
 terraform plan -var-file="providers.tfvars"

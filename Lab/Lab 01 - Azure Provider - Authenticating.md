@@ -302,7 +302,7 @@ You should receive something similar to the below output
 
    For more detail on Terraform init, please visit [here](https://www.terraform.io/docs/commands/init.html)
 
-7.  Inject the `providers.tfvars` file and run terraform plan  
+7.  Inject the `providers.tfvars` file and run terraform plan. If you run into issues related to "az" command being not recognized, you probably missed to set the PATH mentioned in step of this [Running Terraform section](https://github.com/sekar3s/Terraform-Lab/blob/main/Lab/Lab%2001%20-%20Azure%20Provider%20-%20Authenticating.md#--running-terraform-dont-run-these-commands-yet-)
       
 ```console
 terraform plan -var-file="providers.tfvars"
@@ -322,7 +322,7 @@ terraform apply -var-file="providers.tfvars"
 
 ![A screenshot of a computer program Description automatically generated](images/8e912130f2ebcaeb1f778f5011220185.png)
 
-You will see that a new file was created after you ran terraform apply. This .tfstate file is needed for Terraform to keep track of the state of your target infrastructure. This state is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures. If your .terraform folder uses a local backend to keep track of .tfstate, this state file will be updated upon each new terraform apply. This [state](https://www.terraform.io/docs/state/) is stored by default in a local file named "terraform.tfstate", but it can also be stored remotely, which works better in a team environment. We will cover state more in depth in a separate lab.
+You will see that a new file was created after you ran terraform apply. This ``.tfstate` file is needed for Terraform to keep track of the state of your target infrastructure. This state is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures. If your .terraform folder uses a local backend to keep track of .tfstate, this state file will be updated upon each new terraform apply. This [state](https://www.terraform.io/docs/state/) is stored by default in a local file named "terraform.tfstate", but it can also be stored remotely, which works better in a team environment. We will cover state more in depth in a separate lab.
 
 10.  Run terraform plan again but with the `-out` parameter now, which will save the output to a file named myplan.  
       

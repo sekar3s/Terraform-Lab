@@ -131,7 +131,7 @@ Set-AzContext -Subscription <INSERT THE DESIRED SUBSCRIPTION ID>
 
 #### <ins>  Creating Terraform <ins>
 
-1. Open VS Code and open the project folder ```C:\Lab_Files\M07_Terraform\terraform_lab_dir\```. Select `terraform_lab_dir` folder which will be our home folder for the project.
+1. Open/Launch VS Code and open the project folder ```C:\Lab_Files\M07_Terraform\terraform_lab_dir\```. Select `terraform_lab_dir` folder which will be our home folder for the project.
 
 2. Replace the content in the file ```C:\Lab_Files\M07_Terraform\terraform_lab_dir\main.tf``` with the content below and save the file. We also need the subscription ID in the provider block starting from version 4.0.0 as shown [here](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/4.0-upgrade-guide#specifying-subscription-id-is-now-mandatory). We will be setting the variable later in the next section and providing the subscription ID using a variable.
 
@@ -260,13 +260,13 @@ When using Terraform, there are 3 basic commands that you must know
 
 -   [terraform apply](https://www.terraform.io/docs/commands/apply.html) - to apply the plan
 
-1.  Open a new terminal session through VS code menu (Terminal -> New Terminal). Let's add/append the az CLI binary to the PATH variable. Run the command below to add the az CLI directory to the PATH variable. This is important for Terraform to authenticate using the CLI.
+1.  Using VS code menu, open a new PowerShell session (Terminal -> New Terminal). Let's add/append the az CLI binary to the PATH variable. Run the command below to add the az CLI directory to the PATH variable. This is important for Terraform to authenticate using the CLI.
 
 ```powershell
 $env:Path = 'C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin\;' + $env:Path
 ```
 
-2. Let's access the terraform init, plan, and apply methods. Run `terraform init --help` and skim through the capabilities. Feel free to ask questions during this time.
+2. Let's access the terraform init, plan, and apply methods. Run `terraform init --help` and skim through the capabilities. Feel free to ask questions during this time. **NOTE:** If you are not in the `C:\Lab_Files\M07_Terraform\terraform_lab_dir\` directory, switch to the directory before you run terraform commands.
 
 3.  Run Terraform plan
 

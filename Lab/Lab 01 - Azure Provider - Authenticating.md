@@ -88,16 +88,18 @@ Set-AzContext -Subscription <INSERT THE DESIRED SUBSCRIPTION ID>
 
 #### <ins>  Login to azure Azure CLI <ins>
 
-1.  Login into Azure account using CLI
+1.  Login into Azure account using CLI. You can either use the same PowerShell session from the above section or use a Command Prompt. 
    ```console
    az login
    ```
 
 2.  Your default browser will pop up and prompt you for credentials. Select **Work/School** and input your credentials.
 
-3.  Once logged in, you will see a page like this. At this point you may navigate back to your already authenticated powershell session ![picture](images/5a0f8b1b33317a509c46eb4bb3efb8c8.png)
+3.  Select the subscription by prompting the relevant number and hit "Enter"
 
-4.  Once logged in - it's possible to list the Subscriptions associated with the account. The output (similar to below) will display one or more Subscriptions - with the id field being the subscription_id field referenced above.
+4.  Once logged in, you will see a page like this. At this point you may navigate back to your already authenticated powershell session ![picture](images/5a0f8b1b33317a509c46eb4bb3efb8c8.png)
+
+5.  Once logged in - it's possible to list the Subscriptions associated with the account. The output (similar to below) will display one or more Subscriptions - with the id field being the subscription_id field referenced above.
    ```console
    az account list
    ```
@@ -119,15 +121,19 @@ Set-AzContext -Subscription <INSERT THE DESIRED SUBSCRIPTION ID>
 ]
 ```
 
-5.  Copy the subscription ID, which you will be using throughout this course.
+6.  Copy the subscription ID, which you will be using throughout this course. You can also find the Subscription ID under the "Resources tab" in the lab portal.
 
-6.  Set the Azure subscription. Replace the subscription ID from the output above
+7.  Set the Azure subscription. Replace the subscription ID from the output above. 
    ```console
    az account set --subscription <INSERT THE DESIRED SUBSCRIPTION ID>
    ```
-7.  Congrats! You have successfully authenticated and set your subscription.
+8.  Congrats! You have successfully authenticated and set your subscription.
 
-8.  However, for the purpose of this lab, replace the content in the file ```C:\Lab_Files\M07_Terraform\terraform_lab_dir\main.tf``` with the content below. We also need the subscription ID in the provider block starting from version 4.0.0 as shown [here](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/4.0-upgrade-guide#specifying-subscription-id-is-now-mandatory). We will be setting the variable later in the next section and providing the subscription ID using a variable.
+#### <ins>  Creating Terraform <ins>
+
+1. Open VS Code and open the project folder ```C:\Lab_Files\M07_Terraform\terraform_lab_dir\```. Select `terraform_lab_dir` folder which will be our home folder for the project.
+
+2. Replace the content in the file ```C:\Lab_Files\M07_Terraform\terraform_lab_dir\main.tf``` with the content below and save the file. We also need the subscription ID in the provider block starting from version 4.0.0 as shown [here](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/4.0-upgrade-guide#specifying-subscription-id-is-now-mandatory). We will be setting the variable later in the next section and providing the subscription ID using a variable.
 
 ```tf
 terraform {
@@ -147,9 +153,7 @@ provider "azurerm" {
 ```
 When we run ```terraform plan/apply``` commands in the later section, Terraform will authenticate using the existing session that we established via azure cli.
 
-#### <ins>  Creating Terraform <ins>
-
-1.  *Append* the code below to the same file, `.\main.tf`
+3.  *Append* the code below to the same file, `.\main.tf`. Make sure to append the code and not replace the code that we already placed in the `.\main.tf` file.
 
 ```tf
 data "azurerm_resource_group" "main" {
@@ -159,7 +163,7 @@ data "azurerm_resource_group" "main" {
 
 Please note, *data* sources allow data to be fetched or computed for use elsewhere in Terraform configuration. Use of data sources allows a Terraform configuration to make use of information defined outside of Terraform, or defined by another separate Terraform configuration. The code above is fetching an existing resource of type [azurerm_resource_group](https://www.terraform.io/docs/providers/azurerm/r/resource_group.html) which is a resource that comes from the azurerm provider. We have given it a local name "main" so that we may reference it in this fashion later, data.azurerm_resource_group.main. Please learn more [here](https://www.terraform.io/docs/configuration/data-sources.html)
 
-2.  Also, *append* the code below to the same file, `.\main.tf`
+4.  Also, *append* the code below to the same file, `.\main.tf` and save the file.
 
 ```tf
 resource "azurerm_public_ip" "vm" {
@@ -182,7 +186,7 @@ This will deploy a resource of type [azurerm_public_ip](https://www.terraform.io
 
 In step 1 above and in the previous section, you would have noticed that we are using this syntax, `var.rg_name` and `var.azurerm_provider_subscription_id`. We need to ensure that these variables and their values are constructed.
 
-1.  Append the code below in the file `.\variables.tf`
+1.  *Append* the code below in the file `.\variables.tf` and save the file.
 
 ```tf
 variable "rg_name" {
@@ -204,19 +208,19 @@ You will see that the variable default value is a dummy. We will construct a [tf
 
 #### <ins>  Terraform tfvars <ins>
 
-1.  Navigate to https://portal.azure.com
+1.  Navigate to https://portal.azure.com. If you are not already logged in, log in using the same Username and Password you used to authenticate to Azure using PowerShell and the CLI.
 
 2.  In the left blade, click *Resource Groups*
 
 3.  In the lab, there will be one Resource Group. *Copy* the name ![A screenshot of a computer Description automatically generated](images/4fc35d1730dfe3755eefccddb40d6f9f.png)
 
-4.  Append the below code in the file `.\providers.tfvars` and insert the value in "" copied from the previous step
+4.  Append the below code in the file `.\providers.tfvars` and insert the value copied from the previous step inside "" 
 
 ```tf
 rg_name = "<insert value>"
 ```
 
-5.  Append the below code in the file `.\providers.tfvars` and insert the subscription ID value, which can be found from the Azure portal (under Subscriptions)
+5.  Set the Subscription ID variable in `.\providers.tfvars` file. The Subscription ID can be found from the Azure portal (under Subscriptions). You can also find the Subscription ID under the "Resources tab" in the lab portal.
 
 ```tf
 azurerm_provider_subscription_id = "<insert subscription ID here>"
@@ -256,21 +260,27 @@ When using Terraform, there are 3 basic commands that you must know
 
 -   [terraform apply](https://www.terraform.io/docs/commands/apply.html) - to apply the plan
 
-1.  Let's access the terraform init, plan, and apply methods. Run `terraform init --help` and skim through the capabilities. Feel free to ask questions during this time.
+1.  Open a new terminal session through VS code menu (Terminal -> New Terminal). Let's add/append the az CLI binary to the PATH variable. Run the command below to add the az CLI directory to the PATH variable. This is important for Terraform to authenticate using the CLI.
 
-2.  Run Terraform plan
+```powershell
+$env:Path = 'C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin\;' + $env:Path
+```
+
+2. Let's access the terraform init, plan, and apply methods. Run `terraform init --help` and skim through the capabilities. Feel free to ask questions during this time.
+
+3.  Run Terraform plan
 
 ```console
 terraform plan --help
 ```
 
-3.  Run Terraform apply
+4.  Run Terraform apply
 
 ```console
 terraform apply --help
 ```
 
-4.  Run Terraform init 
+5.  Run Terraform init 
 
 ```console
 terraform init
@@ -282,7 +292,7 @@ You should receive something similar to the below output
 
 ![A screenshot of a computer program Description automatically generated](images/ce5b92c68611dc0677726272d4887f5b.png)
 
-5.  As a result of the last step, you will see a `.terraform` folder was automatically created in your working directory. Terraform's *init* managed a few things such as:
+6.  As a result of the last step, you will see a `.terraform` folder was automatically created in your working directory. Terraform's *init* managed a few things such as:
 
     a.  Backend Initialization (which we will cover in a later lab)
 
@@ -292,7 +302,7 @@ You should receive something similar to the below output
 
    For more detail on Terraform init, please visit [here](https://www.terraform.io/docs/commands/init.html)
 
-6.  Inject the `providers.tfvars` file and run terraform plan  
+7.  Inject the `providers.tfvars` file and run terraform plan  
       
 ```console
 terraform plan -var-file="providers.tfvars"
@@ -300,7 +310,7 @@ terraform plan -var-file="providers.tfvars"
 
 **NOTE:** `terraform plan` is an intermittent step to run before actually deploying your resources. This command is a convenient way to check whether the execution plan for a set of changes matches your expectations without making any changes to real resources or to the state.
 
-7.  Run terraform apply and **enter yes** when prompted to perform the actions described in the output.  
+8.  Run terraform apply and **enter yes** when prompted to perform the actions described in the output.  
       
 ```console
 terraform apply -var-file="providers.tfvars"
@@ -308,13 +318,13 @@ terraform apply -var-file="providers.tfvars"
 
 **NOTE:** [terraform apply](https://www.terraform.io/docs/commands/apply.html) is the command that actually deploys your resources. This command is used to apply the changes required to reach the desired state of the configuration, or the pre-determined set of actions generated by a terraform plan execution plan.
 
-8.  Run `ls`. This will show the contents of the current working directory.
+9.  Run `ls`. This will show the contents of the current working directory.
 
 ![A screenshot of a computer program Description automatically generated](images/8e912130f2ebcaeb1f778f5011220185.png)
 
 You will see that a new file was created after you ran terraform apply. This .tfstate file is needed for Terraform to keep track of the state of your target infrastructure. This state is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures. If your .terraform folder uses a local backend to keep track of .tfstate, this state file will be updated upon each new terraform apply. This [state](https://www.terraform.io/docs/state/) is stored by default in a local file named "terraform.tfstate", but it can also be stored remotely, which works better in a team environment. We will cover state more in depth in a separate lab.
 
-9.  Run terraform plan again but with the `-out` parameter now, which will save the output to a file named myplan.  
+10.  Run terraform plan again but with the `-out` parameter now, which will save the output to a file named myplan.  
       
 ```console
 terraform plan -var-file="providers.tfvars" -out myplan
@@ -322,16 +332,16 @@ terraform plan -var-file="providers.tfvars" -out myplan
 
 You will see that there are no changes to apply since the code has already been applied to the target resources.
 
-10.  Run terraform apply again. (Because you used the `-out` argument, your plan was saved to *myplan*. Simply, you do not have to re-inject the tfvars files like you did for step 6 above). You will see that no changes will be made, and it was quite pointless to run an apply after seeing the plan had 0 changes in the previous step.
+11.  Run terraform apply again. (Because you used the `-out` argument, your plan was saved to *myplan*. Simply, you do not have to re-inject the tfvars files like you did for step 6 above). You will see that no changes will be made, and it was quite pointless to run an apply after seeing the plan had 0 changes in the previous step.
 
 ```console
 terraform apply myplan
 ```
 
-11.  Navigate to your subscription in the Azure Portal at <https://portal.azure.com> and click Resource Groups in the left blade.
+12.  Navigate to your subscription in the Azure Portal at <https://portal.azure.com> and click Resource Groups in the left blade.
 
 ![A screenshot of a computer Description automatically generated](images/83526d0b82d3aa44a0415b72502c3b9d.png)
 
-12.  Click on the Resource Group named and you will see that Terraform did indeed create a public ip to an existing Resource Group by authenticating through the existing azure cli session.
+13.  Click on the Resource Group named and you will see that Terraform did indeed create a public ip to an existing Resource Group by authenticating through the existing azure cli session.
 
-13.  **CONGRATS!** You finished the LAB1 Module that will allow you to deploy resources using Terraform through azure cli. From this point, you are able to create Azure Resources in the existing resource group using Terraform.
+14.  **CONGRATS!** You finished the LAB1 Module that will allow you to deploy resources using Terraform through azure cli. From this point, you are able to create Azure Resources in the existing resource group using Terraform.

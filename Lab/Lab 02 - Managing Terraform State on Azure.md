@@ -39,21 +39,19 @@ In this lab, there is a helper script that will
 
 #### <ins> Lab 02 Steps <ins>
 
-1.  Navigate to the terraform_lab_dir where you will be writing code for your lab.
-
-[Launch the VS Code Terminal/Powershell session now and run the commands within the VS code]
+1.  Open/Launch the VS Code Terminal/Powershell session and navigate to the terraform_lab_dir where you will be writing code for your lab.
 
 ```console
 cd C:\Lab_Files\M07_Terraform\terraform_lab_dir
 ```
 
-2.  Replace the entire content of file in `.\helper_scripts\set_remote_backend.ps1` with the content from the github file below
+2.  Replace the entire content of file in `.\helper_scripts\set_remote_backend.ps1` with the content from the github file below. Save the file after replacing the contents. **NOTE:** DON'T FORGET TO SAVE THE SCRIPT OTHERWISE YOU WILL END UP RUNNING THE OLD SCRIPT AND THE CLEAN UP IS A BIT TEDIOUS
 
 <https://github.com/sekar3s/Terraform-Lab/blob/main/set_remote_backend.ps1>
 
-3.  [Login to azure (Azure CLI)](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli-interactively)
+3.  [Login to azure (Azure CLI)](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli-interactively) [Using `az login` command in PowerShell]
 
-4.  [Login to azure Powershell Az](https://learn.microsoft.com/en-us/powershell/azure/authenticate-interactive) (The script in the next step requires to run a mix of azure cli and azure powershell commands)
+4.  [Login to azure Powershell Az](https://learn.microsoft.com/en-us/powershell/azure/authenticate-interactive) [Using `Connect-AzAccount` command in PowerShell] (The script in the next step requires to run a mix of azure cli and azure powershell commands)
 
 5.  In the terminal, **run** the script found at this location `.\helper_scripts\set_remote_backend.ps1` with the following parameters shown followed by parameters (remember to place double quotes) -adminEmail `"<insert the email account you use to login to the Azure subscription>"` -resource_group_name `"<Insert the name of the existing resource group. This value is assigned to rg_name in ./providers.tfvars>"`. Below is an example of how this command will look like:
 
@@ -83,7 +81,7 @@ Writing output to .\lab_output_logs\remote_backend.log
 
 6.  When the script completes, it will have written information about the storage account and key vault in `.\lab_output_logs\remote_backend.log` so that you can reference the information throughout the lab. (Please disregard that the storage access_key value is stored in this file which defeats the whole purpose of the lab. We have placed it there for easy referencing for lab purposes.)
 
-7.  Open the file `.\lab_output_logs\remote_backend.log` through VS code to see the contents
+7.  Open the file `.\lab_output_logs\remote_backend.log` in VS code to see the contents.
 
 **Let's double check our work**
 
@@ -115,7 +113,7 @@ Writing output to .\lab_output_logs\remote_backend.log
 
 #### <ins> Configure state backend with an access key <ins>
 
-The Terraform state backend is configured when running *terraform init*. In this lab, we will be configuring the state backend using an Azure Storage Account access key. (Please note: there are a few other ways of configuring the backend that can be found [here](https://www.terraform.io/docs/backends/types/azurerm.html)). In order to configure the state backend, the following data is required.
+The Terraform state backend is configured when running *terraform init*. In this lab, we will be configuring the state backend using an Azure Storage Account access key. (**Please note:** there are a few other ways of configuring the backend that can be found [here](https://www.terraform.io/docs/backends/types/azurerm.html)). In order to configure the state backend, the following data is required.
 
 -   *storage_account_name* - The name of the Azure Storage account.
 
@@ -125,7 +123,7 @@ The Terraform state backend is configured when running *terraform init*. In this
 
 -   *access_key* - The storage access key.
 
-You obtained this already from the previous section's step 5. Each of these values can be specified in the Terraform configuration file or on the command line, however it is recommended to use an environment variable for the access_key. Using an environment variable prevents the key from being written to disk.
+**You obtained this already from the previous section's step 5 and 6**. Each of these values can be specified in the Terraform configuration file or on the command line, however it is recommended to use an environment variable for the access_key. Using an environment variable prevents the key from being written to disk.
 
 #### <ins> Steps: Code the backend resource <ins>
 
@@ -133,7 +131,7 @@ To configure Terraform to use the [backend](https://www.terraform.io/docs/backen
 
 1.  Open the file `.\main.tf`
 
-2.  **Append** the below code in `.\main.tf` file within the terraform block after the *required_providers* block.
+2.  **Append** the below code in `.\main.tf` file within the terraform block after the *required_providers* block. Save the file.
 
 ```terraform
 backend "azurerm" {
@@ -152,11 +150,11 @@ Notice how we are not instantiating the values here. When setting up terraform b
 
 4.  Open the file `.\configs\dev\backend.tfvars`. 
 
-5.  Replace "" with value copied from step 3 above for the *storage_account_name* assignment. Repeat the step for the prod environment in the next steps.
+5.  Replace "" with value copied from step 3 above for the *storage_account_name* assignment. Save the file. Repeat the step for the prod environment in the next steps.
 
 6.  Open the file `.\configs\prod\backend.tfvars`
 
-7.  Replace "" with value copied from step 3 above for the *storage_account_name* assignment. **We will use prod for a later lab**.
+7.  Replace "" with value copied from step 3 above for the *storage_account_name* assignment. Save the file. **We will use prod for a later lab**.
 
 Notice how *access_key* is not being instantiated in this file. Instead, we will assign it to an environment variable and retrieve it from our Key Vault.
 
@@ -166,13 +164,13 @@ Notice how *access_key* is not being instantiated in this file. Instead, we will
 
 2.  Copy the value assigned to *key_vault_name*
 
-3.  In the terminal, run the following code (make sure the value for --vault-name is correct). Also, include the `$` at the beginning of the command.
+3.  We will assign the Keyvault secret to a variable named "ARM_ACCESS_KEY". In the terminal, run the following code (make sure the value for --vault-name is correct). Also, include the `$` at the beginning of the command. 
 
 ```console
 $env:ARM_ACCESS_KEY=$(az keyvault secret show --name ARM-ACCESS-KEY --vault-name <insert value from step 2> --query value --output tsv)
 ```
 
-4.  Run the below command to check out the value written to the variable.
+4.  Run the below command to check out the value written to the variable "ARM_ACCESS_KEY".
 
 ```console
 Write-Host $env:ARM_ACCESS_KEY

@@ -45,7 +45,7 @@ In this lab, there is a helper script that will
 cd C:\Lab_Files\M07_Terraform\terraform_lab_dir
 ```
 
-2.  Replace the entire content of file in `.\helper_scripts\set_remote_backend.ps1` with the content from the github file below. Save the file after replacing the contents. **NOTE:** DON'T FORGET TO SAVE THE SCRIPT OTHERWISE YOU WILL END UP RUNNING THE OLD SCRIPT AND THE CLEAN UP IS A BIT TEDIOUS
+2.  Replace the entire content of file in `.\helper_scripts\set_remote_backend.ps1` with the content from the github file below. Save the file after replacing the contents. **NOTE: DON'T FORGET TO SAVE THE SCRIPT OTHERWISE YOU WILL END UP RUNNING THE OLD SCRIPT AND THE CLEAN UP IS A BIT TEDIOUS**
 
 <https://github.com/sekar3s/Terraform-Lab/blob/main/set_remote_backend.ps1>
 

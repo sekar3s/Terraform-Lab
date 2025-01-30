@@ -113,7 +113,7 @@ locals {
 
 resource "azurerm_linux_virtual_machine" "vm" {
 
-  name                  = "${local.environment}-vm"
+  name                  = "vm1"
   location              = data.azurerm_resource_group.main.location
   resource_group_name   = data.azurerm_resource_group.main.name
   network_interface_ids = ["${azurerm_network_interface.vm.id}"]

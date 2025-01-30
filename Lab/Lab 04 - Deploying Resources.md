@@ -590,7 +590,7 @@ terraform apply myplan
 ssh <username>@<vmEndpoint value>
 ```
 
-6.  Enter the password value when prompted, which can be found from the output of terraform apply. You can also find the value of the VM password from the value of Key Vault secret "admin-pw".
+6.  Enter "yes" to connect and provide the password value when prompted, which can be found from the output of terraform apply. You can also find the value of the VM password from the value of Key Vault secret "admin-pw".
 
 #### <ins> CHECKPOINT 2 <ins>
 

@@ -101,7 +101,7 @@ variable "environment" {
 
 In this section, we will need to reference our key vault created in lab 2. This Key Vault was not created by our Terraform code, rather the script found under `./helper_scripts/set_remote_backend.ps1`. We will learn how to interact with unmanaged Terraform resources during this lab like our Key Vault.
 
-1.  Navigate to `./configs/dev/keyvault.tfvars` and insert the values shown in `./lab_output_logs/remote_backend.log` *(don’t worry about "key_value_resource_id" parameter for now)*
+1.  Navigate to `./configs/dev/keyvault.tfvars` and insert the value for `key_vault_name`, which can be found in `./lab_output_logs/remote_backend.log` *(don’t worry about "key_value_resource_id" parameter for now)*
 
 2.  Append the below lines to the root `./variables.tf`. Save the file.
 

@@ -7,15 +7,21 @@ In this lab, we will learn how to deploy Azure Resources using basic Terraform m
 
 ---
 
-#### <ins> Prerequisites <ins>
+## <ins> Prerequisites <ins>
 
-1.  We will create these resources in our *dev* environment. Run
+1.  We will create these resources in our *dev* environment. Reinitialize the dev environment using `-reconfigure` option below if you had already initiated the prod env in the DIY Challenge. 
 
 ```console
 terraform init -backend-config="configs/dev/backend.tfvars" -backend-config="access_key=$env:ARM_ACCESS_KEY"
 ```
 
-2.  If you haven't run this at the end of DIY challenge already, run the below command to destroy your target infrastructure generated from the challenge.
+[RECONFIGURE OPTION]
+
+```console
+terraform init -reconfigure -backend-config="configs/dev/backend.tfvars" -backend-config="access_key=$env:ARM_ACCESS_KEY"
+```
+
+2.  If you haven't run this at the end of DIY challenge already, run the below command to destroy your target infrastructure generated from the challenge. **NOTE:** You will have to reinitialize the dev environment first in the previous step before attempting to destroy the dev environment. 
 
 ```console
 terraform destroy -var-file="providers.tfvars"
@@ -23,9 +29,9 @@ terraform destroy -var-file="providers.tfvars"
 
 #### <ins> Lab 04 Section (A) <ins>
 
-We will be writing this code at the main.tf root level. This code can definitely be placed in its own module later on - as you have learned from lab 3. For the purpose of this lab, please develop under the root directory module. If you get lost at any point, please retrace your steps or you may review <https://github.com/sekar3s/Terraform-Lab/blob/main/m07-s04-final-solution.tf> which is the full and final solution that contains all three files: `outputs.tf, variables.tf, and main.tf` code.
+We will be writing this code at the main.tf root level. This code can definitely be placed in its own module later on - as you have learned from lab 3. For the purpose of this lab, please develop under the **root directory module**. If you get lost at any point, please retrace your steps or you may review <https://github.com/sekar3s/Terraform-Lab/blob/main/lab04-final-solution.tf> which is the full and final solution that contains all three files: `outputs.tf, variables.tf, and main.tf` code.
 
-1.  Open `./main.tf`
+1.  Open the root `./main.tf`
 
 2.  Delete everything except
 
@@ -49,7 +55,7 @@ provider "azurerm" {
 }
 ```
 
-3.  Open `./outputs.tf`
+3.  Open the root `./outputs.tf`
 
 4.  Delete everything. We will output different resources during this lab.
 
@@ -57,9 +63,9 @@ provider "azurerm" {
 
 #### <ins> Lab 04 Section (B) <ins>
 
-1.  Open `./variables.tf`
+1.  Open the root `./variables.tf`
 
-2.  Ensure the below code exists
+2.  Ensure the below code exists. Save the file.
 
 ```terraform
 ###################################################
@@ -97,7 +103,7 @@ In this section, we will need to reference our key vault created in lab 2. This 
 
 1.  Navigate to `./configs/dev/keyvault.tfvars` and insert the values shown in `./lab_output_logs/remote_backend.log` *(don’t worry about "key_value_resource_id" parameter for now)*
 
-2.  Append the below lines to `./variables.tf`
+2.  Append the below lines to the root `./variables.tf`. Save the file.
 
 ```terraform
 ###################################################
@@ -125,9 +131,9 @@ variable "admin_pw_name" {
 
 In this section, we will create a simple Azure Ubuntu VM. The vm will have a NIC with a public ip. The vm will sit inside a subnet within a vnet. The subnet will have a network security group with one security rule allowing port 22 for ssh.
 
-1.  Navigate to `./main.tf`
+1.  Navigate to the root `./main.tf`
 
-2.  Place the code we created in the last lab (from the module main.tf) in our root `main.tf`
+2.  Place the code we created in the last lab (from the module `main.tf`) in our root `main.tf`
 
 ```terraform
 locals {
@@ -173,36 +179,44 @@ resource "azurerm_network_security_group" "nsg" {
 
 Notice the *depends_on* meta-argument. The depends_on statement explicitly specifies a dependency. This is only necessary when a resource relies on some other resource's behavior, but does not access any of that resource's data in its arguments. Notice how this is not actually necessary as we are already accessing *data.azurerm_resource_group.main* arguments via *location* and *resource_group_name*. Nonetheless, it does not hurt to be explicit.
 
-5.  Before we create a vm, we need to create the vnet that supports it. Paste the below vnet configuration. We will place the vm in subnet1. (For the purpose of the lab, we are hardcoding a couple values like the *address_prefix*. These values can be placed in variables later on)
+5.  Before we create a vm, we need to create the vnet and subnet that supports it. Paste the below vnet and subnet configuration. We will place the vm in subnet1. (For the purpose of the lab, we are hardcoding a couple values like the *address_prefix*. These values can be placed in variables later on)
 
 ```terraform
 resource "azurerm_virtual_network" "main" {
   name                = "${local.environment}-network"
   address_space       = ["10.0.0.0/16"]
-  location            = "${data.azurerm_resource_group.main.location}"
-  resource_group_name = "${data.azurerm_resource_group.main.name}"
+  location            = data.azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.main.name
+}
 
-  subnet {
+resource "azurerm_subnet" "subnet" {
+    virtual_network_name = azurerm_virtual_network.main.name
+    resource_group_name = data.azurerm_resource_group.main.name
     name           = "subnet1"
-    address_prefix = "10.0.0.0/24"
-    security_group = "${azurerm_network_security_group.nsg.id}"
-  }
+    address_prefixes = ["10.0.0.0/24"]
 
   depends_on = [data.azurerm_resource_group.main, azurerm_network_security_group.nsg]
 }
-```
 
-6.  We need to create the NIC. Notice in the [documentation](https://www.terraform.io/docs/providers/azurerm/r/network_interface.html) that we need to obtain the subnet id as part of the ip configuration of the NIC. The subnet1 resource is contained within the *azurerm_virtual_network.main* resource. azurerm_virtual_network.main.subnet will print out as an array of map. Rather than having to extrapolate the subnet id from azurerm_virtual_network.main.subnet, we can simply use the [data](https://www.terraform.io/docs/configuration/data-sources.html) source for [subnet](https://www.terraform.io/docs/providers/azurerm/r/subnet.html). We can do this by specifying the name, vnet name, and resource group name like so:
-
-```terraform
 data "azurerm_subnet" "subnet" {
   name                 = "subnet1"
   virtual_network_name = "${local.environment}-network"
-  resource_group_name  = "${data.azurerm_resource_group.main.name}"
+  resource_group_name  = data.azurerm_resource_group.main.name
+
+  depends_on = [azurerm_virtual_network.main, azurerm_subnet.subnet]
 }
 ```
 
-7.  Now, we can create our NIC and attach it to subnet1 like so:
+6.  Create an association between the subnet and network security group created in step 4 using the code below.
+
+```terraform
+resource "azurerm_subnet_network_security_group_association" "nsg-association" {
+  subnet_id                 = azurerm_subnet.subnet.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
+}
+```
+
+7.  Now, we can create our NIC and attach it to subnet1 using the code below. Notice in the [documentation](https://www.terraform.io/docs/providers/azurerm/r/network_interface.html) that we need to obtain the subnet id as part of the ip configuration of the NIC. The subnet1 resource is contained within the *azurerm_virtual_network.main* resource. azurerm_virtual_network.main.subnet will print out as an array of map. Rather than having to extrapolate the subnet id from azurerm_virtual_network.main.subnet, we can simply use the [data](https://www.terraform.io/docs/configuration/data-sources.html) source for [subnet](https://www.terraform.io/docs/providers/azurerm/r/subnet.html) that we created in the previous step.
 
 ```terraform
 resource "azurerm_network_interface" "vm" {
@@ -225,7 +239,7 @@ resource "azurerm_network_interface" "vm" {
 
 ```terraform
 resource "azurerm_public_ip" "vm" {
-  name                = "mypip"
+  name                = "${local.environment}-pip"
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
   allocation_method   = "Static"
@@ -253,49 +267,45 @@ locals {
 }
 ```
 
-11.  Create the ubuntu machine
+11.  Create the ubuntu machine. **NOTE: The name of the Virtual Machine has to be "vm1" since it's enforced by the policy attached to the subscription in the lab environment. If you use any other name than "vm1" for the virtual machine, terraform apply will fail.**
 
 ```terraform
-resource "azurerm_virtual_machine" "vm" {
+resource "azurerm_linux_virtual_machine" "vm" {
 
-  name                  = "${local.environment}-vm"
-  location              = "${data.azurerm_resource_group.main.location}"
-  resource_group_name   = "${data.azurerm_resource_group.main.name}"
+  name                  = "vm1"
+  location              = data.azurerm_resource_group.main.location
+  resource_group_name   = data.azurerm_resource_group.main.name
   network_interface_ids = ["${azurerm_network_interface.vm.id}"]
-  vm_size               = "Standard_DS1_v2"
+  size               = "Standard_DS1_v2"
 
-  storage_image_reference {
+  source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "20.04-LTS"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts-gen2"
     version   = "latest"
   }
-  storage_os_disk {
+  os_disk {
     name              = "myosdisk1"
     caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
+    storage_account_type = "Premium_LRS"
   }
-  os_profile {
-    computer_name  = local.vm.computer_name
-    admin_username = local.vm.user_name
-    admin_password = data.azurerm_key_vault_secret.main.value
-  }
-  os_profile_linux_config {
-    disable_password_authentication = false
-  }
+
+  computer_name  = local.vm.computer_name
+  admin_username = local.vm.user_name
+  admin_password = data.azurerm_key_vault_secret.main.value
+  disable_password_authentication = false
+  
   tags = {
     environment = local.environment
   }
 
   depends_on = [data.azurerm_resource_group.main, azurerm_virtual_network.main]
-
 }
 ```
 
 #### <ins> Lab 04 Section (E) <ins>
 
-1.  Navigate to `./outputs.tf` and let's include our vm endpoint info
+1.  Navigate to `./outputs.tf` and let's include our vm endpoint info. The value for password is marked as nonsensitive to expose the password as shown [here](https://developer.hashicorp.com/terraform/language/functions/nonsensitive)
 
 ```terraform
 output "vmEndpoint" {
@@ -305,13 +315,13 @@ output "username" {
   value = local.vm.user_name
 }
 output "password" {
-  value = data.azurerm_key_vault_secret.main.value
+  value = nonsensitive(data.azurerm_key_vault_secret.main.value)
 }
 ```
 
 #### <ins> Lab 04 Section (F) <ins>
 
-1.  CTRL^S to save `main.tf, variables.tf, and outputs.tf` in the root directory
+1.  Save `main.tf, variables.tf, and outputs.tf` in the root directory.
 
 2.  Run `terraform fmt`. [This](https://www.terraform.io/docs/commands/fmt.html) will format the spacing of your code.
 
@@ -325,7 +335,7 @@ terraform fmt
 
 ![A screenshot of a computer Description automatically generated](images/c9e11ab88cbc41b7c9325898e18186ea.png)
 
-5.  Go to `./configs/dev/keyvaults.tfvars` and replace the value as advised in the current value for *key_vault_name* and *key_vault_resource_id*
+5.  Go to `./configs/dev/keyvaults.tfvars` and replace the value *key_vault_resource_id* with the resource ID copied from the previous step.
 
 ```terraform
 # To be filled in lab 4
@@ -487,7 +497,7 @@ resource "azurerm_network_interface" "vm" {
 }
 
 resource "azurerm_public_ip" "vm" {
-  name                = "mypip"
+  name                = "${local.environment}-pip"
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
   allocation_method   = "Static"
@@ -508,7 +518,7 @@ locals {
 
 resource "azurerm_linux_virtual_machine" "vm" {
 
-  name                  = "${local.environment}-vm"
+  name                  = "vm1"
   location              = data.azurerm_resource_group.main.location
   resource_group_name   = data.azurerm_resource_group.main.name
   network_interface_ids = ["${azurerm_network_interface.vm.id}"]
@@ -580,9 +590,7 @@ terraform apply myplan
 ssh <username>@<vmEndpoint value>
 ```
 
-6.  When prompted, enter yes
-
-7.  Enter the password value, which can be found from the output of terraform apply
+6.  Enter the password value when prompted, which can be found from the output of terraform apply. You can also find the value of the VM password from the value of Key Vault secret "admin-pw".
 
 #### <ins> CHECKPOINT 2 <ins>
 

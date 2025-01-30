@@ -11,7 +11,10 @@ The labs includes a self-paced [exercise/challenge](https://github.com/sekar3s/T
 ## Pre-requisites
 
 1. Launch the Virtual Lab session (Access/Training key will be provided by your instructor on the day of the workshop).
-2. The virtual session will be active for 7 days after saving, otherwise it will expire after 8 hours. Please make sure to Save the session before wrapping up for the day.
+2. The virtual session will be active for 7 days after saving, otherwise it will expire after 8 hours. **Please make sure to SAVE the session before wrapping up for the day.**
+
+![](images/savelab.png)
+
 3. This document will replace the instructions you will under the “Instructions” (shown in screenshot below) tab/pane of the lab.
 4. The labs are designed to completed in order, with each one building on the previous.
 5. **Please make sure to read the NOTES in the steps in each section of the lab as some steps have specific requirements and instructions.**

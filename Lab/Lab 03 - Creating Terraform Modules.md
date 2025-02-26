@@ -56,7 +56,7 @@ frontend_module = {
 
 4.  Both PIPs must exist at the same time
 
-5.  Use `./configs/prod/backend-prod.tfvars` when deploying `./configs/prod/m07-s03-e01-prod.tfvars` and `./configs/dev/backend-dev.tfvars` when deploying `./configs/dev/m07-s03-e01-dev.tfvars`. Please note that it’s a recommended practice to separate access from state files in lower environments from state files in higher environments like production. It is especially important since state files contain plain text (i.e. passwords) of the state of your target environment.
+5.  Use `./configs/prod/backend.tfvars` when deploying `./configs/prod/m07-s03-e01-prod.tfvars` and `./configs/dev/backend.tfvars` when deploying `./configs/dev/m07-s03-e01-dev.tfvars`. Please note that it’s a recommended practice to separate access from state files in lower environments from state files in higher environments like production. It is especially important since state files contain plain text (i.e. passwords) of the state of your target environment.
 
 By the end of the challenge, you should have the following target components:
 
